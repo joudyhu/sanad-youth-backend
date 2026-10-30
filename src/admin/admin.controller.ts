@@ -1,0 +1,3 @@
+import { Controller,Post,Body,UseGuards } from '@nestjs/common'; import { IsEmail,IsString,MinLength,MaxLength } from 'class-validator'; import { AdminService } from './admin.service'; import { JwtAuthGuard,RolesGuard,Roles,CurrentUser } from '../common/auth'; import { Role } from '@prisma/client';
+class CreateSupervisorDto { @IsString() @MaxLength(100) name!:string; @IsEmail() email!:string; @IsString() @MinLength(12) @MaxLength(72) password!:string; }
+@Controller('admin') @UseGuards(JwtAuthGuard,RolesGuard) @Roles(Role.ADMIN) export class AdminController { constructor(private service:AdminService){} @Post('supervisors') createSupervisor(@Body() dto:CreateSupervisorDto){return this.service.createSupervisor(dto)} }

@@ -1,0 +1,54 @@
+
+erDiagram
+    USER ||--o{ PROGRAM : supervises
+    USER ||--o{ APPLICATION : submits
+    USER ||--o{ ANNOUNCEMENT : authors
+
+    PROGRAM ||--o{ SESSION : contains
+    PROGRAM ||--o{ APPLICATION : receives
+    PROGRAM o|--o{ ANNOUNCEMENT : targets
+    PROGRAM ||--o{ MATERIAL : provides
+
+    USER {
+        string id
+        string name
+        string email
+        string password
+        string role
+    }
+
+    PROGRAM {
+        string id
+        string title
+        string description
+        string supervisorId
+    }
+
+    SESSION {
+        string id
+        string title
+        string programId
+    }
+
+    APPLICATION {
+        string id
+        string userId
+        string programId
+        string status
+    }
+
+    ANNOUNCEMENT {
+        string id
+        string authorId
+        string programId
+        string title
+        string content
+    }
+
+    MATERIAL {
+        string id
+        string programId
+        string title
+        string uploadedById
+    }
+
